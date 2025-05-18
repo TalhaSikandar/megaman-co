@@ -1,0 +1,11 @@
+BASE_DIR = "./"
+DATA_DIR = BASE_DIR + "data/"
+PREPROCESSED_DATA_DIR = DATA_DIR + "preprocessed/"
+PREPROCESSED_DATA_PATH = PREPROCESSED_DATA_DIR + "preprocessed_data.npz"
+
+MODEL_CHECKPOINT_DIR = DATA_DIR + "checkpoints"
+MODEL_CHECKPOINT_PATH = MODEL_CHECKPOINT_DIR + "/checkpoint.pkl"
+
+MODEL_PATH = MODEL_CHECKPOINT_DIR + "/lstm_model.pkl"
+
+MODEL_METADATA_PATH = DATA_DIR + "model_metadata.json"
