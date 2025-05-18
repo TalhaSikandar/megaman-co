@@ -56,3 +56,29 @@ class Linear:
     def reset_gradients(self):
         self.dW = np.zeros_like(self.W)
         self.db = np.zeros_like(self.b)
+
+class Dropout:
+    def __init__(self, dropout_rate):
+        self.dropout_rate = dropout_rate
+        self.mask = None
+
+    def forward(self, x, training=True):
+        if not training or self.dropout_rate == 0.0:
+            self.mask = np.ones_like(x)
+            return x
+        self.mask = (np.random.rand(*x.shape) > self.dropout_rate).astype(x.dtype)
+        return x * self.mask / (1.0 - self.dropout_rate)
+
+    def backward(self, dout):
+        return dout * self.mask / (1.0 - self.dropout_rate)
+
+class ReLU:
+    def __init__(self):
+        self.mask = None
+
+    def forward(self, x):
+        self.mask = (x > 0)
+        return x * self.mask
+
+    def backward(self, dout):
+        return dout * self.mask
