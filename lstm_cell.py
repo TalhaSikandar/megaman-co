@@ -51,6 +51,15 @@ class LSTMCell:
             self.m[name] = np.zeros_like(param)
             self.v[name] = np.zeros_like(param)
 
+        self.dW_f = np.zeros_like(self.W_f)
+        self.db_f = np.zeros_like(self.b_f)
+        self.dW_i = np.zeros_like(self.W_i)
+        self.db_i = np.zeros_like(self.b_i)
+        self.dW_o = np.zeros_like(self.W_o)
+        self.db_o = np.zeros_like(self.b_o)
+        self.dW_c = np.zeros_like(self.W_c)
+        self.db_c = np.zeros_like(self.b_c)
+
     def forward(self, x_t, h_prev, c_prev):
         concat = np.vstack((h_prev, x_t))  # (input_size + hidden_size, 1)
 
@@ -114,28 +123,28 @@ class LSTMCell:
 
     
     def reset_gradients(self):
-            self.dW_f = np.zeros_like(self.W_f)
-            self.db_f = np.zeros_like(self.b_f)
-            self.dW_i = np.zeros_like(self.W_i)
-            self.db_i = np.zeros_like(self.b_i)
-            self.dW_o = np.zeros_like(self.W_o)
-            self.db_o = np.zeros_like(self.b_o)
-            self.dW_c = np.zeros_like(self.W_c)
-            self.db_c = np.zeros_like(self.b_c)
+        self.dW_f = np.zeros_like(self.W_f)
+        self.db_f = np.zeros_like(self.b_f)
+        self.dW_i = np.zeros_like(self.W_i)
+        self.db_i = np.zeros_like(self.b_i)
+        self.dW_o = np.zeros_like(self.W_o)
+        self.db_o = np.zeros_like(self.b_o)
+        self.dW_c = np.zeros_like(self.W_c)
+        self.db_c = np.zeros_like(self.b_c)
 
     def update_weights(self, lr):
-            # Gradient descent
-            self.W_f -= lr * self.dW_f
-            self.b_f -= lr * self.db_f
-            self.W_i -= lr * self.dW_i
-            self.b_i -= lr * self.db_i
-            self.W_o -= lr * self.dW_o
-            self.b_o -= lr * self.db_o
-            self.W_c -= lr * self.dW_c
-            self.b_c -= lr * self.db_c
+        # Gradient descent
+        self.W_f -= lr * self.dW_f
+        self.b_f -= lr * self.db_f
+        self.W_i -= lr * self.dW_i
+        self.b_i -= lr * self.db_i
+        self.W_o -= lr * self.dW_o
+        self.b_o -= lr * self.db_o
+        self.W_c -= lr * self.dW_c
+        self.b_c -= lr * self.db_c
 
-            # Reset gradients after update
-            self.reset_gradients()
+        # Reset gradients after update
+        self.reset_gradients()
 
     def update_weights_adam(self, lr=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8):
         self.t += 1

@@ -2,6 +2,7 @@ import numpy as np
 from data_utils import load_data
 from lstm_layer import LSTMLayer
 from metadata import MODEL_PATH, PREPROCESSED_DATA_PATH, MODEL_CHECKPOINT_PATH
+from train import plot_predictions
 
 def load_model(path):
     import pickle
@@ -23,6 +24,7 @@ def main():
     preds = predict(model, X_test)
     print("Predictions:", preds[:10])
     print("Ground Truth:", y_test[:10].flatten())
+    plot_predictions(y_test, preds, title="Predictions vs Ground Truth", save_path="predictions.png")
 
 if __name__ == "__main__":
     main()

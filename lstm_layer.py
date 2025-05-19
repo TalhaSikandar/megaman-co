@@ -61,8 +61,8 @@ class LSTMLayer:
         dL_dh_next = dL_dh
         dL_dc_next = np.zeros((self.hidden_size, 1))
 
-        self.cell.reset_gradients()  # Reset before BPTT
-        self.fc.reset_gradients() # Reset before BPTT
+        # self.cell.reset_gradients()  # Reset before BPTT
+        # self.fc.reset_gradients() # Reset before BPTT
 
         for t in reversed(range(len(self.inputs))):
             h_prev = self.hiddens[t-1] if t > 0 else np.zeros_like(self.hiddens[0])

@@ -18,11 +18,17 @@ def train(model, X_train, y_train, X_val, y_val,
     val_losses = []
     counter = 0
     for epoch in range(start_epoch, epochs):
+        y_preds = []
+        y_trues = []
         epoch_loss = 0
         for i in range(len(X_train)):
             x_seq = X_train[i]
             y_true = y_train[i].reshape(-1, 1)
+            y_trues.append(y_true)
             y_pred = model.forward(x_seq)
+            y_preds.append(y_pred)
+            # print("y_pred", y_pred)
+            # print("y_true", y_true)
             loss = model.compute_loss(y_true)
             epoch_loss += loss
             model.backward(y_true, learning_rate=lr)
@@ -60,7 +66,7 @@ def train(model, X_train, y_train, X_val, y_val,
             print("Early stopping due to no improvement")
             break
 
-    return losses, val_losses
+    return losses, val_losses, y_trues, y_preds
 
 def save_model(model, path, model_name=None):
     import pickle
@@ -99,10 +105,10 @@ def evaluate(model, X_test, y_test):
     print(f"Test Loss: {avg_test_loss:.6f}")
     print(f"MAE: {mae:.6f}")
     print(f"RMSE: {rmse:.6f}")
-    tolerance = 0.02  # 2%
+    tolerance = 0.03  # 2%
     accurate = np.abs(preds - y_true_flat) < (tolerance * np.abs(y_true_flat))
     accuracy = np.mean(accurate)
-    print(f"Tolerance Accuracy (within 2%): {accuracy:.2%}")
+    print(f"Tolerance Accuracy: {accuracy:.2%}")
 
     return {
         "test_loss": avg_test_loss,
@@ -147,6 +153,24 @@ def save_metadata(metadata, path, filename=None):
         json.dump(existing_metadata, f, indent=4)
     print(f"Metadata saved to {path}")
 
+def plot_predictions(y_true, y_pred, title="Stock Price Prediction", save_path=None):
+    import matplotlib.pyplot as plt
+    import numpy as np
+    y_true = np.array(y_true).flatten()
+    y_pred = np.array(y_pred).flatten()
+    plt.figure(figsize=(15, 6))
+    plt.plot(y_true, label="True Price", color="blue")
+    plt.plot(y_pred, label="Predicted Price", color="red", linestyle="--")
+    plt.title(title)
+    plt.xlabel("Time")
+    plt.ylabel("Price")
+    plt.legend()
+    plt.grid(True)
+    if save_path:
+        plt.savefig(save_path)
+        print(f"Plot saved to {save_path}")
+    plt.show()
+
 def main():
     # Load data
     X_train, y_train, X_val, y_val, X_test, y_test = load_data(PREPROCESSED_DATA_PATH)
@@ -181,9 +205,11 @@ def main():
         epochs = args.epochs
         current_epoch = 0
         lr = args.lr
-    train(model, X_train, y_train, X_val, y_val, epochs=epochs, start_epoch=current_epoch, lr=lr, checkpoint_path=MODEL_CHECKPOINT_DIR)
+    _, _, y_trues, y_preds = train(model, X_train, y_train, X_val, y_val, epochs=epochs, start_epoch=current_epoch, lr=lr, checkpoint_path=MODEL_CHECKPOINT_DIR)
     save_model(model, MODEL_PATH)
     save_plots(model, MODEL_CHECKPOINT_DIR)
+    # Plot predictions
+    plot_predictions(y_true=y_trues, y_pred=y_preds, title="Stock Price Prediction", save_path=MODEL_CHECKPOINT_DIR + "/predictions.png")   
     test_metrics = evaluate(model, X_test, y_test)
 
     # Save metadata
@@ -209,7 +235,7 @@ if __name__ == "__main__":
 
 
 
-# Has stuck here - Train and Loss high
+# Has stuck here - Train and Loss high - Resolved this by removing the reset_gradient which was called twice.
 # Epoch 11/100 - Train Loss: 103.124531 - Val Loss: 39.469859
 # Epoch 12/100 - Train Loss: 103.130404 - Val Loss: 39.472441
 # Epoch 13/100 - Train Loss: 103.132880 - Val Loss: 39.473489

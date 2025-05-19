@@ -178,5 +178,140 @@
             "rmse": 13.965200294295649,
             "accuracy": 0.06711409395973154
         }
+    },
+    {
+        "input_size": 6,
+        "hidden_size": 64,
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.001,
+        "best_val_loss": 4.7451372301868,
+        "final_train_loss": 14.81107112634198,
+        "test_metrics": {
+            "test_loss": 15.653479868544938,
+            "mae": 3.3185796704093584,
+            "rmse": 3.956447885230507,
+            "accuracy": 0.3959731543624161
+        }
+    },
+    {
+        "input_size": 6,
+        "hidden_size": 64,
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.001,
+        "best_val_loss": 4.7451372301868,
+        "final_train_loss": 14.81107112634198,
+        "test_metrics": {
+            "test_loss": 15.653479868544938,
+            "mae": 3.3185796704093584,
+            "rmse": 3.956447885230507,
+            "accuracy": 0.3959731543624161
+        }
+    },
+    {
+        "input_size": 6,
+        "hidden_size": 64,
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.001,
+        "best_val_loss": 4.7451372301868,
+        "final_train_loss": 14.81107112634198,
+        "test_metrics": {
+            "test_loss": 15.653479868544938,
+            "mae": 3.3185796704093584,
+            "rmse": 3.956447885230507,
+            "accuracy": 0.3959731543624161
+        }
+    },
+    {
+        "input_size": 6,
+        "hidden_size": 64,
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.001,
+        "best_val_loss": 4.7451372301868,
+        "final_train_loss": 14.81107112634198,
+        "test_metrics": {
+            "test_loss": 15.653479868544938,
+            "mae": 3.3185796704093584,
+            "rmse": 3.956447885230507,
+            "accuracy": 0.3959731543624161
+        }
+    },
+    {
+        "input_size": 6,
+        "hidden_size": 64,
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.001,
+        "best_val_loss": 4.7451372301868,
+        "final_train_loss": 14.81107112634198,
+        "test_metrics": {
+            "test_loss": 15.653479868544938,
+            "mae": 3.3185796704093584,
+            "rmse": 3.956447885230507,
+            "accuracy": 0.3959731543624161
+        }
+    },
+    {
+        "input_size": 6,
+        "hidden_size": 64,
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.001,
+        "best_val_loss": 4.7451372301868,
+        "final_train_loss": 14.81107112634198,
+        "test_metrics": {
+            "test_loss": 15.653479868544938,
+            "mae": 3.3185796704093584,
+            "rmse": 3.956447885230507,
+            "accuracy": 1.0
+        }
+    },
+    {
+        "input_size": 6,
+        "hidden_size": 64,
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.001,
+        "best_val_loss": 4.7451372301868,
+        "final_train_loss": 14.81107112634198,
+        "test_metrics": {
+            "test_loss": 15.653479868544938,
+            "mae": 3.3185796704093584,
+            "rmse": 3.956447885230507,
+            "accuracy": 1.0
+        }
+    },
+    {
+        "input_size": 6,
+        "hidden_size": 64,
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.001,
+        "best_val_loss": 4.7451372301868,
+        "final_train_loss": 14.81107112634198,
+        "test_metrics": {
+            "test_loss": 15.653479868544938,
+            "mae": 3.3185796704093584,
+            "rmse": 3.956447885230507,
+            "accuracy": 0.9194630872483222
+        }
+    },
+    {
+        "input_size": 6,
+        "hidden_size": 64,
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.001,
+        "best_val_loss": 4.7451372301868,
+        "final_train_loss": 14.81107112634198,
+        "test_metrics": {
+            "test_loss": 15.653479868544938,
+            "mae": 3.3185796704093584,
+            "rmse": 3.956447885230507,
+            "accuracy": 0.6375838926174496
+        }
     }
 ]
