@@ -6,6 +6,11 @@ PREPROCESSED_DATA_PATH = PREPROCESSED_DATA_DIR + "preprocessed_data.npz"
 MODEL_CHECKPOINT_DIR = DATA_DIR + "checkpoints"
 MODEL_CHECKPOINT_PATH = MODEL_CHECKPOINT_DIR + "/checkpoint.pkl"
 
+MODEL_STACK_CHECKPOINT_DIR = DATA_DIR + "checkpoints_stack"
+MODEL_STACK_CHECKPOINT_PATH = MODEL_STACK_CHECKPOINT_DIR + "/checkpoint_stack.pkl"
+
 MODEL_PATH = MODEL_CHECKPOINT_DIR + "/lstm_model.pkl"
+MODEL_STACK_PATH = MODEL_STACK_CHECKPOINT_DIR + "/lstm_stack_model.pkl"
 
 MODEL_METADATA_PATH = DATA_DIR + "model_metadata.json"
+MODEL_STACK_METADATA_PATH = DATA_DIR + "model_stack_metadata.json"

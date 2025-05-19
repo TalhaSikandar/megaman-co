@@ -1,8 +1,8 @@
 from data_utils import load_data
 from lstm_stack import StackedLSTMLayer
 from config import EPOCHS, LEARNING_RATE
-from metadata import MODEL_CHECKPOINT_DIR, MODEL_CHECKPOINT_PATH, MODEL_METADATA_PATH
-from metadata import PREPROCESSED_DATA_PATH, MODEL_PATH
+from metadata import MODEL_CHECKPOINT_DIR, MODEL_CHECKPOINT_PATH, MODEL_METADATA_PATH, MODEL_STACK_CHECKPOINT_PATH, MODEL_STACK_CHECKPOINT_DIR
+from metadata import PREPROCESSED_DATA_PATH, MODEL_PATH, MODEL_STACK_PATH, MODEL_STACK_METADATA_PATH
 
 def train(model, X_train, y_train, X_val, y_val, 
           epochs=10, start_epoch=0, 
@@ -45,7 +45,7 @@ def train(model, X_train, y_train, X_val, y_val,
         if checkpoint_path and avg_val_loss < model.best_val_loss:
             model.best_val_loss = avg_val_loss
             counter = 0
-            save_model(model, MODEL_CHECKPOINT_PATH)
+            save_model(model, checkpoint_path)
             if verbose:
                 print(f"Checkpoint saved at epoch {epoch+1} with val loss {avg_val_loss:.6f}")
         else:
@@ -147,6 +147,7 @@ def print_data_values(x, y):
 def main():
     # Load data
     X_train, y_train, X_val, y_val, X_test, y_test = load_data(PREPROCESSED_DATA_PATH)
+    print("Loaded data")
     # print_data_values(X_train, y_train)
     input_size = X_train.shape[2]
     output_size = 1
@@ -170,7 +171,7 @@ def main():
     epochs = 0
     lr = 0.001
     if load_from_checkpoint:
-        model = load_model(MODEL_CHECKPOINT_PATH)
+        model = load_model(MODEL_STACK_CHECKPOINT_PATH)
         epochs = model.epochs
         lr = model.learning_rate
         current_epoch = model.current_epoch
@@ -183,10 +184,10 @@ def main():
         epochs = args.epochs
         current_epoch = 0
         lr = args.lr
-
-    train(model, X_train[:10], y_train[:10], X_val, y_val, epochs=epochs, start_epoch=current_epoch, lr=lr, checkpoint_path=MODEL_CHECKPOINT_DIR)
-    save_model(model, MODEL_PATH)
-    save_plots(model, MODEL_CHECKPOINT_DIR)
+        print("Training new model")
+    train(model, X_train, y_train, X_val, y_val, epochs=epochs, start_epoch=current_epoch, lr=lr, checkpoint_path=MODEL_STACK_CHECKPOINT_PATH)
+    save_model(model, MODEL_STACK_PATH)
+    save_plots(model, MODEL_STACK_CHECKPOINT_DIR)
     test_metrics = evaluate(model, X_test, y_test)
 
     metadata = {
@@ -199,7 +200,9 @@ def main():
         "final_train_loss": model.losses[-1] if hasattr(model, "losses") else None,
         "test_metrics": test_metrics,
     }
-    save_metadata(metadata, MODEL_METADATA_PATH)
+    save_metadata(metadata, MODEL_STACK_METADATA_PATH)
 
 if __name__ == "__main__":
     main()
+
+# 

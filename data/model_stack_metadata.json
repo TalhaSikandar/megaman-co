@@ -1,0 +1,30 @@
+[
+    {
+        "input_size": 6,
+        "layer_configs": [
+            {
+                "hidden_size": 32,
+                "dropout": 0.1
+            },
+            {
+                "hidden_size": 64,
+                "dropout": 0.2
+            },
+            {
+                "hidden_size": 128,
+                "dropout": 0.3
+            }
+        ],
+        "output_size": 1,
+        "epochs": 10,
+        "learning_rate": 0.001,
+        "best_val_loss": 1138.5778913777922,
+        "final_train_loss": 3104.3872166276715,
+        "test_metrics": {
+            "test_loss": 4025.1248199590736,
+            "mae": 56.50471638081644,
+            "rmse": 63.44387141370765,
+            "accuracy": 0.07020280811232449
+        }
+    }
+]

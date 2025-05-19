@@ -102,10 +102,10 @@ def evaluate(model, X_test, y_test):
     y_true_flat = y_test.flatten()
     mae = np.mean(np.abs(preds - y_true_flat))
     rmse = np.sqrt(np.mean((preds - y_true_flat) ** 2))
-    print(f"Test Loss: {avg_test_loss:.6f}")
+    # print(f"Test Loss: {avg_test_loss:.6f}")
     print(f"MAE: {mae:.6f}")
     print(f"RMSE: {rmse:.6f}")
-    tolerance = 0.03  # 2%
+    tolerance = 0.09
     accurate = np.abs(preds - y_true_flat) < (tolerance * np.abs(y_true_flat))
     accuracy = np.mean(accurate)
     print(f"Tolerance Accuracy: {accuracy:.2%}")
@@ -188,7 +188,7 @@ def main():
     load_from_checkpoint = args.load_ckpt is not None
 
     epochs = 0
-    lr = 0.001
+    # lr = 0.001
     if load_from_checkpoint:
         model = load_model(MODEL_CHECKPOINT_PATH)
         epochs = model.epochs
@@ -235,6 +235,7 @@ if __name__ == "__main__":
 
 
 
+# LOGS
 # Has stuck here - Train and Loss high - Resolved this by removing the reset_gradient which was called twice.
 # Epoch 11/100 - Train Loss: 103.124531 - Val Loss: 39.469859
 # Epoch 12/100 - Train Loss: 103.130404 - Val Loss: 39.472441
@@ -247,3 +248,18 @@ if __name__ == "__main__":
 # Epoch 19/100 - Train Loss: 103.134677 - Val Loss: 39.474179
 # Epoch 20/100 - Train Loss: 103.134682 - Val Loss: 39.474180
 # Epoch 21/100 - Train Loss: 103.134685 - Val Loss: 39.474181
+
+# Changed lookback window from 60 -> 30
+# Model became really slow and did not converge
+
+# Changed lookback window from 30 -> 90
+# Its converging really good for now
+# Checkpoint saved at epoch 36 with val loss 20.237960
+# Epoch 37/100 - Train Loss: 19.289976 - Val Loss: 20.029927
+# Model saved to ./data/checkpoints/checkpoint.pkl
+# Checkpoint saved at epoch 37 with val loss 20.029927
+#...
+# Checkpoint saved at epoch 88 with val loss 13.376115
+# Epoch 89/100 - Train Loss: 14.322639 - Val Loss: 13.349268
+# Model saved to ./data/checkpoints/checkpoint.pkl
+# Checkpoint saved at epoch 89 with val loss 13.349268

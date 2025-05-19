@@ -1,7 +1,8 @@
 import numpy as np
 from lstm_stack import StackedLSTMLayer
-from metadata import MODEL_PATH, PREPROCESSED_DATA_DIR
+from metadata import MODEL_PATH, PREPROCESSED_DATA_PATH
 from data_utils import load_data
+from train import plot_predictions
 
 def load_model(path):
     import pickle
@@ -20,7 +21,7 @@ def infer(model, X):
 
 def main():
     # Load data (adapt as needed for your inference scenario)
-    _, _, _, _, X_test, y_test = load_data(PREPROCESSED_DATA_DIR)
+    _, _, _, _, X_test, y_test = load_data(PREPROCESSED_DATA_PATH)
     model = load_model(MODEL_PATH)
     preds = infer(model, X_test)
     print("Predictions:", preds)
@@ -29,6 +30,6 @@ def main():
         y_true_flat = y_test.flatten()
         mae = np.mean(np.abs(preds - y_true_flat))
         print(f"MAE: {mae:.6f}")
-
+    plot_predictions(y_test, preds, title="Predictions vs Ground Truth - LSTM_STACK", save_path="predictions_stack.png")
 if __name__ == "__main__":
     main()
