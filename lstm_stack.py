@@ -78,9 +78,9 @@ class StackedLSTMLayer:
         dL_dh_next[-1] = dL_dh_top.copy()
 
         # 4) Reset all parameter gradients before accumulating
-        self.fc.reset_gradients()
-        for L in self.layers:
-            L.reset_gradients()
+        # self.fc.reset_gradients()
+        # for L in self.layers:
+        #     L.reset_gradients()
 
         seq_len = len(self.inputs)
 
@@ -104,9 +104,9 @@ class StackedLSTMLayer:
                 dx, dh_prev, dc_prev = self.layers[i].backward(dh, dc)
 
                 # 5.5) Clip each gradient if desired
-                dx      = np.clip(dx,      -clip_value, clip_value)
-                dh_prev = np.clip(dh_prev, -clip_value, clip_value)
-                dc_prev = np.clip(dc_prev, -clip_value, clip_value)
+                # dx      = np.clip(dx,      -clip_value, clip_value)
+                # dh_prev = np.clip(dh_prev, -clip_value, clip_value)
+                # dc_prev = np.clip(dc_prev, -clip_value, clip_value)
 
                 # 5.6) Store next‑time‑step gradients for this layer
                 dL_dh_next[i] = dh_prev

@@ -313,5 +313,149 @@
             "rmse": 3.956447885230507,
             "accuracy": 0.6375838926174496
         }
+    },
+    {
+        "input_size": 6,
+        "layer_configs": [
+            {
+                "hidden_size": 50,
+                "dropout": 0.2
+            },
+            {
+                "hidden_size": 60,
+                "dropout": 0.3
+            },
+            {
+                "hidden_size": 80,
+                "dropout": 0.4
+            },
+            {
+                "hidden_size": 120,
+                "dropout": 0.5
+            }
+        ],
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.1,
+        "best_val_loss": 115.61090522924933,
+        "final_train_loss": 1324.2421231406856,
+        "test_metrics": {
+            "test_loss": 1631.2976758386615,
+            "mae": 39.788759409887284,
+            "rmse": 40.38932626126192,
+            "accuracy": 0.0
+        }
+    },
+    {
+        "input_size": 6,
+        "layer_configs": [
+            {
+                "hidden_size": 32,
+                "dropout": 0.0
+            },
+            {
+                "hidden_size": 64,
+                "dropout": 0.0
+            },
+            {
+                "hidden_size": 128,
+                "dropout": 0.0
+            }
+        ],
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.01,
+        "best_val_loss": 24.772718391140454,
+        "final_train_loss": 618.8117880352663,
+        "test_metrics": {
+            "test_loss": 594.151220099085,
+            "mae": 23.36661977501207,
+            "rmse": 24.37521733439694,
+            "accuracy": 0.0
+        }
+    },
+    {
+        "input_size": 6,
+        "layer_configs": [
+            {
+                "hidden_size": 32,
+                "dropout": 0.0
+            },
+            {
+                "hidden_size": 64,
+                "dropout": 0.0
+            },
+            {
+                "hidden_size": 128,
+                "dropout": 0.0
+            }
+        ],
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.01,
+        "best_val_loss": 24.772718391140454,
+        "final_train_loss": 32.14387361325599,
+        "test_metrics": {
+            "test_loss": 1894.05215040501,
+            "mae": 42.96393662101442,
+            "rmse": 43.52070944280445,
+            "accuracy": 0.0
+        }
+    },
+    {
+        "input_size": 6,
+        "layer_configs": [
+            {
+                "hidden_size": 32,
+                "dropout": 0.0
+            },
+            {
+                "hidden_size": 64,
+                "dropout": 0.0
+            },
+            {
+                "hidden_size": 128,
+                "dropout": 0.0
+            }
+        ],
+        "output_size": 1,
+        "epochs": 100,
+        "learning_rate": 0.01,
+        "best_val_loss": 24.772718391140454,
+        "final_train_loss": 32.14387361325599,
+        "test_metrics": {
+            "test_loss": 1894.05215040501,
+            "mae": 42.96393662101442,
+            "rmse": 43.52070944280445,
+            "accuracy": 0.0
+        }
+    },
+    {
+        "input_size": 6,
+        "layer_configs": [
+            {
+                "hidden_size": 32,
+                "dropout": 0.1
+            },
+            {
+                "hidden_size": 64,
+                "dropout": 0.2
+            },
+            {
+                "hidden_size": 128,
+                "dropout": 0.3
+            }
+        ],
+        "output_size": 1,
+        "epochs": 150,
+        "learning_rate": 0.01,
+        "best_val_loss": 24.801595811611957,
+        "final_train_loss": 304.8833139848824,
+        "test_metrics": {
+            "test_loss": 1777.0005629972754,
+            "mae": 41.579421139300464,
+            "rmse": 42.154484494502775,
+            "accuracy": 0.0
+        }
     }
 ]

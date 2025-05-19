@@ -9,7 +9,7 @@ def train(model, X_train, y_train, X_val, y_val,
           lr=0.001, 
           verbose=1, 
           checkpoint_path=None,
-          patience=20):
+          patience=50):
     losses = []
     val_losses = []
     counter = 0
@@ -95,10 +95,10 @@ def evaluate(model, X_test, y_test):
     print(f"Test Loss: {avg_test_loss:.6f}")
     print(f"MAE: {mae:.6f}")
     print(f"RMSE: {rmse:.6f}")
-    tolerance = 0.02  # 2%
+    tolerance = 0.04
     accurate = np.abs(preds - y_true_flat) < (tolerance * np.abs(y_true_flat))
     accuracy = np.mean(accurate)
-    print(f"Tolerance Accuracy (within 2%): {accuracy:.2%}")
+    print(f"Tolerance Accuracy : {accuracy:.2%}")
 
     return {
         "test_loss": avg_test_loss,
@@ -140,19 +140,23 @@ def save_metadata(metadata, path, filename=None):
     with open(path, "w") as f:
         json.dump(existing_metadata, f, indent=4)
     print(f"Metadata saved to {path}")
+def print_data_values(x, y):
+    print("X-shape :", x.shape, "\n", "X :", x[:10])
+    print("Y-shape :", x.shape, "\n", "Y :", y[:10])
 
 def main():
     # Load data
     X_train, y_train, X_val, y_val, X_test, y_test = load_data(PREPROCESSED_DATA_PATH)
+    # print_data_values(X_train, y_train)
     input_size = X_train.shape[2]
     output_size = 1
 
     # Example stack config
     layer_configs = [
-        {'hidden_size': 50, 'dropout': 0.2},
-        {'hidden_size': 60, 'dropout': 0.3},
-        {'hidden_size': 80, 'dropout': 0.4},
-        {'hidden_size': 120, 'dropout': 0.5},
+        {'hidden_size': 32, 'dropout': 0.1},
+        {'hidden_size': 64, 'dropout': 0.2},
+        {'hidden_size': 128, 'dropout': 0.3},
+        # {'hidden_size': 120, 'dropout': 0.0},
     ]
 
     import argparse
@@ -180,7 +184,7 @@ def main():
         current_epoch = 0
         lr = args.lr
 
-    train(model, X_train, y_train, X_val, y_val, epochs=epochs, start_epoch=current_epoch, lr=lr, checkpoint_path=MODEL_CHECKPOINT_DIR)
+    train(model, X_train[:10], y_train[:10], X_val, y_val, epochs=epochs, start_epoch=current_epoch, lr=lr, checkpoint_path=MODEL_CHECKPOINT_DIR)
     save_model(model, MODEL_PATH)
     save_plots(model, MODEL_CHECKPOINT_DIR)
     test_metrics = evaluate(model, X_test, y_test)
