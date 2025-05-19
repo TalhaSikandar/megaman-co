@@ -1,8 +1,13 @@
 from data_utils import load_data
 from lstm_stack import StackedLSTMLayer
-from config import EPOCHS, LEARNING_RATE
-from metadata import MODEL_CHECKPOINT_DIR, MODEL_CHECKPOINT_PATH, MODEL_METADATA_PATH, MODEL_STACK_CHECKPOINT_PATH, MODEL_STACK_CHECKPOINT_DIR
-from metadata import PREPROCESSED_DATA_PATH, MODEL_PATH, MODEL_STACK_PATH, MODEL_STACK_METADATA_PATH
+from config import EPOCHS, LEARNING_RATE, TOLERANCE
+from metadata import (
+    PREPROCESSED_DATA_PATH, 
+    MODEL_STACK_PATH, 
+    MODEL_STACK_METADATA_PATH,
+    MODEL_STACK_CHECKPOINT_DIR,
+    MODEL_STACK_CHECKPOINT_PATH
+)
 
 def train(model, X_train, y_train, X_val, y_val, 
           epochs=10, start_epoch=0, 
@@ -95,8 +100,8 @@ def evaluate(model, X_test, y_test):
     print(f"Test Loss: {avg_test_loss:.6f}")
     print(f"MAE: {mae:.6f}")
     print(f"RMSE: {rmse:.6f}")
-    tolerance = 0.04
-    accurate = np.abs(preds - y_true_flat) < (tolerance * np.abs(y_true_flat))
+    # tolerance = 0.04
+    accurate = np.abs(preds - y_true_flat) < (TOLERANCE * np.abs(y_true_flat))
     accuracy = np.mean(accurate)
     print(f"Tolerance Accuracy : {accuracy:.2%}")
 

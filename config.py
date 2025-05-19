@@ -4,6 +4,7 @@ VAL_SPLIT = 0.15      # 15% for validation
 
 EPOCHS = 100
 LEARNING_RATE = 0.001
+TOLERANCE = 0.09
 
 
 # project/
